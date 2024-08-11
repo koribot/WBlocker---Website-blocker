@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "ES6",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "rootDir": "src",
+    "outDir": "src/dist",
+    "sourceMap": false,
+    "noEmitOnError": true,
+    "moduleResolution": "bundler",
+    "typeRoots": [ "node_modules/@types" ]
+  },
+  "include": [
+    "src/scripts/**/*.ts", 
+    "src/scripts/**/*.js",
+    "src/lib-js/**/*.ts",
+    "src/lib-js/**/*.js"
+  ],
+  "exclude": [
+    "src/lib-js/**/*.js",
+    "src/socket.script.js"
+  ]
+}
