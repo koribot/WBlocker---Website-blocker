@@ -6,39 +6,43 @@
     <link href="/css/tailwind.css" rel="stylesheet" />
     <title>WBlocker</title>
   </head>
-  <body>
-    <div class="bg-white p-6 rounded-lg shadow-lg w-[400px]">
+  <body class="overflow-y-hidden!">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] max-h-[500px] overflow-hidden">
       <h2 class="text-2xl font-bold mb-4">WBlocker - Website Blocker</h2>
       <div class="mb-4">
-        <label for="current-href" class="block text-gray-700 text-sm font-bold mb-2">Current URL:</label>
+        <label
+          for="current-href"
+          class="block text-gray-700 text-sm font-bold mb-2"
+          >Current URL:</label
+        >
         <span class="flex">
-          <input id="current-href" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-          <button class="p-2 bg-[#122753] text-white">Block</button>
+          <input
+            id="current-href"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+          <button id="block-website" class="p-2 bg-[#122753] text-white">
+            Block
+          </button>
         </span>
       </div>
-      <div>
+      <div class="max-h-[300px] overflow-y-scroll">
         <table class="table-auto w-full">
           <thead>
             <tr class="bg-gray-200">
               <th class="px-4 py-2">Blocked Websites</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="border px-4 py-2 flex justify-between">
-                <input class="w-full" value="Centro comercial Moctezuma" readonly/>
-                <button class="bg-[#147014] p-2 text-white">
-                  Unblock
-                </button>
-              </td>
-            </tr>
-            <!-- Add more rows as needed -->
-          </tbody>
+          <tbody id="blocked-website-body"></tbody>
         </table>
       </div>
     </div>
     <footer class="mt-4 bg-gray-100 p-6">
-      <a href="https://github.com/koribot/WBlocker-Website-blocker" target="_blank" class="text-blue-500 hover:underline">@github</a>
+      <a
+        href="https://github.com/koribot/WBlocker-Website-blocker"
+        target="_blank"
+        class="text-blue-500 hover:underline"
+        >@github</a
+      >
     </footer>
     <script src="/dist/scripts/popup.ts.js"></script>
   </body>

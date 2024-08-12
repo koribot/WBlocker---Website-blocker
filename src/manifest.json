@@ -23,7 +23,7 @@
   "content_scripts":[
     {
       "matches": ["<all_urls>"],
-      "js": ["dist/utils/socket.script.js"] 
+      "js": ["dist/utils/socket.script.js", "dist/utils/modal.ts.js"] 
     },
     {
       "matches": ["https://www.google.com/*"],
@@ -42,7 +42,7 @@
   "web_accessible_resources": [
       {
           "resources": [
-
+            "dist/utils/*"
           ],
           "matches": [
               "<all_urls>"

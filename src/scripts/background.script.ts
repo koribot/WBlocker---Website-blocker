@@ -19,29 +19,39 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
       }
     }
-    chrome.tabs.query({url: matchUrls, currentWindow: true}, function (tabs) {
+    chrome.tabs.query({ url: matchUrls, currentWindow: true }, function (tabs) {
       tabs.forEach((tab: any, index: number) => {
-          if (tab.id && tab.url) {
-            // if (index < matchUrls.length) {
-            // console.log(matchUrls[index], tab.url)
-            // if (matchUrls[index] === tab.url) {
-            // if (index < scriptsPath.length) {
-              // setTimeout(() => {
-              //   chrome.runtime.reload();
-              // }, 1);
-              // chrome.scripting.executeScript({
-              //   target: { tabId: tab.id },
-              //   files: [scriptsPath[index]],
-              // });
-              chrome.tabs.reload(tab.id);
-              chrome.runtime.reload()
-              // }
-              // }
-            // }
-          }
-        });
+        if (tab.id && tab.url) {
+          // if (index < matchUrls.length) {
+          // console.log(matchUrls[index], tab.url)
+          // if (matchUrls[index] === tab.url) {
+          // if (index < scriptsPath.length) {
+          // setTimeout(() => {
+          //   chrome.runtime.reload();
+          // }, 1);
+          // chrome.scripting.executeScript({
+          //   target: { tabId: tab.id },
+          //   files: [scriptsPath[index]],
+          // });
+          chrome.tabs.reload(tab.id);
+          chrome.runtime.reload();
+          // }
+          // }
+          // }
+        }
       });
-      sendResponse({ success: true });
+    });
+    sendResponse({ success: true });
   }
   /************************************************************************/
+  // if (request.message === "modal") {
+  //   console.log("hey")
+  //   chrome.tabs.query({ url: ["https://www.google.com/"], currentWindow: true }, function (tabs:any) {
+  //     chrome.scripting.executeScript({
+  //       target: { tabId: tabs[0].id },
+  //       files: ["dist/utils/modal.ts.js"],
+  //       args: ["Hello, world!"],
+  //     });
+  //   });
+  // }
 });
