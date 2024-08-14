@@ -1,9 +1,12 @@
-export function getStorage(name: string): Promise<any> {
+export function getStorage(name: string): Promise<{success: boolean, data: any}> {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(name, (result) => {
       if (chrome.runtime.lastError) {
-        reject({success: false, data:chrome.runtime.lastError});
-      } else {
+        console.log(chrome.runtime.lastError)
+        resolve({success: false, data:"Chrome Error"});
+      }else if(Object.keys(result).length <= 0){
+        resolve({success: false, data: "Not Found"})
+      }else {
         resolve({success: true, data: result[name]});
       }
     });

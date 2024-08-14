@@ -1,4 +1,4 @@
-export function setStorage({ name, value }: { name: string, value: any }): Promise<any> {
+export function setStorage({ name, value }: { name: string, value: any }): Promise<{success: boolean, data: any}> {
   return new Promise((resolve, reject) => {
     chrome.storage.local.set({ [name]: value }, () => {
       if (chrome.runtime.lastError) {

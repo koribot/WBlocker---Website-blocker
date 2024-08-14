@@ -67,5 +67,13 @@ module.exports = {
           },
         ],
       }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: "src/rules.json",
+            to: "./rules.json",
+          },
+        ],
+      }),
     ],
 };

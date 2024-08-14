@@ -7,8 +7,19 @@
       "activeTab",
       "tabs",
       "storage",
-      "scripting"
+      "scripting",
+      "declarativeNetRequest",
+      "declarativeNetRequestWithHostAccess"
   ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
   "commands":{
     "go-to-amazon":{
       "suggested_key":{
@@ -23,15 +34,15 @@
   "content_scripts":[
     {
       "matches": ["<all_urls>"],
-      "js": ["dist/utils/socket.script.js", "dist/utils/modal.ts.js"] 
+      "js": ["utils/socket.script.js"] 
     },
     {
       "matches": ["https://www.google.com/*"],
-      "js": ["dist/scripts/content.script.ts.js"]
+      "js": ["scripts/content.script.ts.js"]
     }
   ],
   "background": {
-      "service_worker": "dist/scripts/background.script.ts.js"
+      "service_worker": "scripts/background.script.ts.js"
   },
   "host_permissions": [
     "<all_urls>"
@@ -42,7 +53,9 @@
   "web_accessible_resources": [
       {
           "resources": [
-            "dist/utils/*"
+            "utils/*",
+            "html/blocked.html",
+            "icons/*"
           ],
           "matches": [
               "<all_urls>"

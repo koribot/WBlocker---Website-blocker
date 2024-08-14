@@ -5,29 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/css/tailwind.css" rel="stylesheet" />
     <title>WBlocker</title>
+    <style>
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+    
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+    
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+    
+    </style>
+    
   </head>
-  <body class="overflow-y-hidden!">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] max-h-[500px] overflow-hidden">
-      <h2 class="text-2xl font-bold mb-4">WBlocker - Website Blocker</h2>
-      <div class="mb-4">
-        <label
-          for="current-href"
-          class="block text-gray-700 text-sm font-bold mb-2"
-          >Current URL:</label
-        >
-        <span class="flex">
-          <input
-            id="current-href"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          <button id="block-website" class="p-2 bg-[#122753] text-white">
-            Block
-          </button>
-        </span>
+  <body class="">
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg w-[600px] h-[fit-content]"
+    >
+      <h2
+        class="text-center text-2xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text"
+      >
+        WBlocker - Website Blocker
+      </h2>
+
+      <div class="mb-4 flex flex-col">
+        <div>
+          <label
+            for="current-href"
+            class="text-gray-700 text-sm font-bold mb-2 flex"
+          >
+            <a
+              href="../html/urlPattern.html"
+              target="_blank"
+              class="relative flex items-center gap-1"
+            >
+              <p class="flex">Url Pattern</p>
+              <img
+                class="absolute top-[1px] right-[-17px] object-contain w-[15px]"
+                src="../icons//external-link.svg"
+                alt="external-link" /></a
+          ></label>
+          <span class="flex">
+            <input
+              id="current-href"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+            <button id="block-website" class="p-2 bg-[#122753] text-white">
+              Block
+            </button>
+          </span>
+        </div>
+        <p class="text-center pt-2 mb-0">Or</p>
+        <div>
+          <label
+            for="current-href"
+            class="text-gray-700 text-sm font-bold mb-2 flex"
+          >
+            <a
+              href="../html/regexPattern.html"
+              target="_blank"
+              class="relative flex items-center gap-1"
+            >
+              <p class="flex">Regex Pattern</p>
+              <img
+                class="absolute top-[1px] right-[-17px] object-contain w-[15px]"
+                src="../icons//external-link.svg"
+                alt="external-link" /></a
+          ></label>
+          <span class="flex">
+            <input
+              id="current-href-regex"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+            <button id="block-website-regex" class="p-2 bg-[#122753] text-white">
+              Block
+            </button>
+          </span>
+        </div>
       </div>
       <div class="max-h-[300px] overflow-y-scroll">
         <table class="table-auto w-full">
-          <thead>
+          <thead class="sticky top-0">
             <tr class="bg-gray-200">
               <th class="px-4 py-2">Blocked Websites</th>
             </tr>
@@ -36,14 +97,25 @@
         </table>
       </div>
     </div>
-    <footer class="mt-4 bg-gray-100 p-6">
-      <a
+    <footer class="mt-4 bg-gray-100 p-6 grid grid-cols-2">
+      <div class="flex flex-col">
+        <a
         href="https://github.com/koribot/WBlocker-Website-blocker"
         target="_blank"
-        class="text-blue-500 hover:underline"
-        >@github</a
-      >
+        class="text-blue-500 hover:underline w-[fit-content]"
+        >Github (open source)</a
+        >
+        <a
+        href="https://koribot.github.io/ebextractor-support-page/"
+        target="_blank"
+        class="text-blue-500 hover:underline w-[fit-content]"
+        >Support me</a
+        >
+      </div>
+      <div class="flex justify-end">
+        <button id="edit-password" class="underline">Edit Password</button>
+      </div>
     </footer>
-    <script src="/dist/scripts/popup.ts.js"></script>
+    <script src="/scripts/popup.ts.js"></script>
   </body>
 </html>

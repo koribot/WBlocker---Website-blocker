@@ -2,6 +2,7 @@
   "name": "wblocker-website-blocker",
   "version": "0.0.1",
   "license": "MIT",
+  "main": "src",
   "author": "Walid Cawasa",
   "description": "A Chrome extension that lets you block websites",
   "homepage": "https://github.com/koribot/WBlocker---Website-blocker",
@@ -14,6 +15,8 @@
     "build": "./clean.sh .production-build && tailwindcss -i ./src/global.css -o ./src/css/tailwind.css --minify && webpack --config ./webpack/webpack.prod.js",
     "build-vite": "vite build --mode production",
     "hr": "node hot-reload.js",
+    "clean-dev": "./clean.sh .dev-build",
+    "clean-prod": "./clean.sh .production-build",
     "dev": "tsc --build --clean && concurrently \"yarn hr\" \"tailwindcss -i ./src/global.css -o ./src/css/tailwind.css --minify --watch\" \" webpack --config ./webpack/webpack.dev.js --watch\" "
   },
   "devDependencies": {

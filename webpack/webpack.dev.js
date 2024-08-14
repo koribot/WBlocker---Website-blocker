@@ -20,7 +20,7 @@ module.exports = merge(webpackCommon, {
     },
     output: {
       path: path.join(__dirname, "../.dev-build"),
-      filename: "dist/[name].js",
+      filename: "[name].js",
     },
 });
 

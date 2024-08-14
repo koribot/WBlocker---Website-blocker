@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regex Filter Patterns</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 h-screen flex justify-center items-center">
+    <div class="flex flex-col p-20 bg-white rounded-lg shadow-md text-lg">
+      <div class="flex justify-between items-center mb-2">
+        <div class="text-2xl font-semibold" id="property-RuleCondition-Regex Pattern">
+          Regex Pattern
+        </div>
+      </div>
+      <p class="mb-4">
+        The regular expression pattern which is matched against the network request url.
+        The pattern is anchored at both ends.
+      </p>
+      <p class="mb-4">
+        If omitted, all urls are matched. An empty string is not allowed.
+      </p>
+      <p class="mb-4">
+        Note: Only one of <code>Url Pattern</code> or <code>Regex Pattern</code> can
+        be specified.
+      </p>
+      <p class="mb-4">
+        Here are some examples of regular expression patterns that can be used with <code>Regex Pattern</code>:
+      </p>
+      <ul class="list-disc list-inside mb-4">
+        <li>
+          <code>.*example\.com.*</code>: Matches any URL that contains "example.com".
+        </li>
+        <li>
+          <code>^https://.*\.example\.com/.*</code>: Matches any URL that starts with "https://" and ends with ".example.com".
+        </li>
+        <li>
+          <code>^https://(www\.)?example\.com/.*</code>: Matches any URL that starts with "https://" and ends with ".example.com", with an optional "www." subdomain.
+        </li>
+        <li>
+          <code>^https://.*\.example\.com/path/.*</code>: Matches any URL that starts with "https://" and contains ".example.com/path/" in the path.
+        </li>
+      </ul>
+      <p class="mb-4">
+        Note: The <code>Regex Pattern</code> must be composed of only ASCII characters. This is matched against a url where the host is encoded in the punycode format (in case of internationalized domains) and any other non-ascii characters are url encoded in utf-8.
+      </p>
+    </div>
+  </body>
+</html>

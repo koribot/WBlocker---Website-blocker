@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url Pattern</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 h-screen flex justify-center items-center">
+    <div class="flex flex-col p-20 bg-white rounded-lg shadow-md text-lg">
+      <div class="flex justify-between items-center mb-2">
+        <div
+          class="text-2xl font-semibold"
+          id="property-RuleCondition-urlFilter"
+        >
+          Url Pattern
+        </div>
+      </div>
+      <p class="mb-4">
+        The pattern which is matched against the network request url. Supported
+        constructs:
+      </p>
+      <ul class="list-disc list-inside mb-4">
+        <li>
+          <strong>'*'</strong>: Wildcard: Matches any number of characters.
+        </li>
+        <li>
+          <strong>'|'</strong>: Left/right anchor: If used at either end of the
+          pattern, specifies the beginning/end of the url respectively.
+        </li>
+        <li>
+          <strong>'||'</strong>: Domain name anchor: If used at the beginning of
+          the pattern, specifies the start of a (sub-)domain of the URL.
+        </li>
+        <li>
+          <strong>'^'</strong>: Separator character: This matches anything
+          except a letter, a digit, or one of the following: <code>_</code>,
+          <code>-</code>, <code>.</code>, or <code>%</code>. This also match the
+          end of the URL.
+        </li>
+      </ul>
+      <p class="mb-4">
+        If omitted, all urls are matched. An empty string is not allowed.
+      </p>
+      <p class="mb-4">
+        A pattern beginning with <code>||*</code> is not allowed. Use
+        <code>*</code> instead.
+      </p>
+      <p class="mb-4">
+        Note: Only one of <code class="bg-gray-400">Url Pattern</code> or <code class="bg-gray-400">Regex Pattern</code> can
+        be specified.
+      </p>
+      <p class="mb-4">
+        Note: The <code class="bg-gray-400">Url Pattern</code> must be composed of only ASCII
+        characters. This is matched against a url where the host is encoded in
+        the punycode format (in case of internationalized domains) and any other
+        non-ascii characters are url encoded in utf-8.
+      </p>
+      <p class="mb-4">
+        Here are some examples of URL patterns that can be used with the <code class="bg-gray-400">Url Pattern</code> property:
+      </p>
+      <ul class="list-disc list-inside mb-4">
+        <li>
+          <code>*example.com*</code>: Matches any URL that contains "example.com".
+        </li>
+        <li>
+          <code>|https://*example.com*</code>: Matches any URL that starts with "https://" and contains "example.com".
+        </li>
+        <li>
+          <code>||example.com|</code>: Matches any URL that starts with "example.com" and ends with a character.
+        </li>
+        <li>
+          <code>||example.com/path/*</code>: Matches any URL that starts with "example.com/path/" and contains any number of characters after the slash.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

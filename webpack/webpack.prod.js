@@ -22,6 +22,6 @@ module.exports = merge(webpackCommon, {
   },
   output: {
     path: path.join(__dirname, "../.production-build"),
-    filename: "dist/[name].js",
+    filename: "[name].js",
   },
 });
