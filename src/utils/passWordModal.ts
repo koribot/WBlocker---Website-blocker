@@ -205,8 +205,6 @@ export function passWordModal(mode?: string): Promise<boolean> {
             _passFromStorage.success &&
             _passFromStorage.data
           ) {
-            console.log("storage",_passFromStorage)
-            console.log("input",password)
             if (_passFromStorage.data === password) {
               modal.remove();
               resolve(true);
