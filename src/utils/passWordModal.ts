@@ -184,6 +184,7 @@ export function passWordModal(mode?: string): Promise<boolean> {
     ) as HTMLFormElement;
     if (passwordForm) {
       let timeoutId: number | undefined;
+      let timpoutIdEditMode: number | undefined;
       passwordForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (mode !== "edit") {
@@ -227,16 +228,32 @@ export function passWordModal(mode?: string): Promise<boolean> {
          const correctPass = await getStorage("70617373776F7264")
          if(correctPass.success && correctPass.data.length>0){
            if(oldPass!==correctPass.data){
-            statusText.textContent = "Incorrect Old Password"
-           }else{
-            const is = await setStorage({name:"70617373776F7264", value: newPass})
-            statusText.textContent = "Password Successfully Changed"
+              statusText.classList.add("text-red-400")
+              statusText.classList.remove("text-[green]")
+              statusText.textContent = "Incorrect Old Password"
+            }else{
+              const is = await setStorage({name:"70617373776F7264", value: newPass})
+              statusText.classList.remove("text-red-400")
+              statusText.classList.add(
+                "text-[green]"
+              )
+              statusText.textContent = "Password Successfully Changed"
+              passWordInputOld.value = "";
+              passWordInputNew.value = "";
+            }
+           clearTimeout(timpoutIdEditMode)
+           timpoutIdEditMode = Number(setTimeout(() => {
+            statusText.textContent = ""
+            statusText.classList.remove("text-[green]")
             statusText.classList.add(
-              "text-[green]"
+              "text-red-400"
             )
-           }
+
+           }, 1000));
          }
         }
+
+
       });
     } else {
       console.log(passwordForm)

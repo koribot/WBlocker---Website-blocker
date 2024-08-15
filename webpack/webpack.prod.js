@@ -12,13 +12,6 @@ module.exports = merge(webpackCommon, {
       acc[`scripts/${name}`] = `./src/scripts/${file}`;
       return acc;
     }, {}),
-    ...fs.readdirSync('./src/utils').reduce((acc, file) => {
-      const name = path.basename(file, '.js');
-      if (name !== 'socket.script') {
-        acc[`utils/${name}`] = `./src/utils/${file}`;
-      }
-      return acc;
-    }, {}),
   },
   output: {
     path: path.join(__dirname, "../.production-build"),
