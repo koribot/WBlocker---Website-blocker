@@ -1,6 +1,7 @@
 import { getStorage } from "./getChromeStorage";
 import { getById } from "./getElementById";
 import { setStorage } from "./setChromeStorage";
+import { simpleEncryptor } from "./simpleEncryptor";
 
 export function passWordModal(mode?: string): Promise<boolean> {
   return new Promise(async (resolve, reject) => {
@@ -114,7 +115,6 @@ export function passWordModal(mode?: string): Promise<boolean> {
       });
     }
 
-
     // for create and enter password mode
     const hideViewPassword: HTMLImageElement = getById(
       "password-view"
@@ -127,8 +127,6 @@ export function passWordModal(mode?: string): Promise<boolean> {
     const statusText: HTMLParagraphElement = getById(
       "status"
     ) as HTMLParagraphElement;
-
-
 
     // for edit password mode
     const hideViewPasswordOld: HTMLImageElement = getById(
@@ -156,7 +154,7 @@ export function passWordModal(mode?: string): Promise<boolean> {
           }
         });
       }
-    }else if(mode==="edit"){
+    } else if (mode === "edit") {
       if (hideViewPasswordOld && hideViewPasswordNew) {
         hideViewPasswordOld.addEventListener("click", () => {
           if (hideViewPasswordOld.src === `${extensionUrl}icons/hide.png`) {
@@ -188,7 +186,7 @@ export function passWordModal(mode?: string): Promise<boolean> {
       passwordForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (mode !== "edit") {
-          const password = passWordInput.value;
+          const { data: password } = simpleEncryptor(passWordInput.value);
           if (
             !_passFromStorage.success &&
             _passFromStorage.data === "Not Found"
@@ -205,8 +203,10 @@ export function passWordModal(mode?: string): Promise<boolean> {
             }
           } else if (
             _passFromStorage.success &&
-            _passFromStorage.data.length > 0
+            _passFromStorage.data
           ) {
+            console.log("storage",_passFromStorage)
+            console.log("input",password)
             if (_passFromStorage.data === password) {
               modal.remove();
               resolve(true);
@@ -223,40 +223,37 @@ export function passWordModal(mode?: string): Promise<boolean> {
             }
           }
         } else if (mode === "edit") {
-         const oldPass =  passWordInputOld.value
-         const newPass = passWordInputNew.value
-         const correctPass = await getStorage("70617373776F7264")
-         if(correctPass.success && correctPass.data.length>0){
-           if(oldPass!==correctPass.data){
-              statusText.classList.add("text-red-400")
-              statusText.classList.remove("text-[green]")
-              statusText.textContent = "Incorrect Old Password"
-            }else{
-              const is = await setStorage({name:"70617373776F7264", value: newPass})
-              statusText.classList.remove("text-red-400")
-              statusText.classList.add(
-                "text-[green]"
-              )
-              statusText.textContent = "Password Successfully Changed"
+          const { data: oldPass } = simpleEncryptor(passWordInputOld.value);
+          const { data: newPass } = simpleEncryptor(passWordInputNew.value);
+          const correctPass = await getStorage("70617373776F7264");
+          if (correctPass.success && correctPass.data) {
+            if (oldPass !== correctPass.data) {
+              statusText.classList.add("text-red-400");
+              statusText.classList.remove("text-[green]");
+              statusText.textContent = "Incorrect Old Password";
+            } else {
+              const is = await setStorage({
+                name: "70617373776F7264",
+                value: newPass,
+              });
+              statusText.classList.remove("text-red-400");
+              statusText.classList.add("text-[green]");
+              statusText.textContent = "Password Successfully Changed";
               passWordInputOld.value = "";
               passWordInputNew.value = "";
             }
-           clearTimeout(timpoutIdEditMode)
-           timpoutIdEditMode = Number(setTimeout(() => {
-            statusText.textContent = ""
-            statusText.classList.remove("text-[green]")
-            statusText.classList.add(
-              "text-red-400"
-            )
-
-           }, 1000));
-         }
+            clearTimeout(timpoutIdEditMode);
+            timpoutIdEditMode = Number(
+              setTimeout(() => {
+                statusText.textContent = "";
+                statusText.classList.remove("text-[green]");
+                statusText.classList.add("text-red-400");
+              }, 1000)
+            );
+          }
         }
-
-
       });
     } else {
-      console.log(passwordForm)
       reject(false);
     }
   });
